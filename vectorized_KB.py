@@ -2,6 +2,7 @@ import json
 import logging
 import numpy as np
 import faiss
+import generation
 from tqdm import tqdm
 from FlagEmbedding import FlagModel
 
@@ -76,13 +77,11 @@ def save_embeddings_to_file(embeddings, filepath):
         json.dump(embeddings.tolist(), f)
     logging.info(f"Embedding Saved to {filepath}")
 
-
 if __name__ == "__main__":
-    data = load_data('examples/BIM.json')
-    model_path = 'retriever/multilingual-e5-large'
-    model = load_embedding_model(model_path)
-    json_name_path = 'result/json_obj_name.json'
-    embeddings, names = encode_names(model, data, json_name_path)       # 根据检索方式的不同替换嵌入函数
+    args = generation.parser.parse_args()
+    data = load_data(args.data_path)
+    model = load_embedding_model(args.embedding_model)
+    embeddings, names = encode_names(model, data, args.json_name_path)       # 根据检索方式的不同替换嵌入函数
     index = create_faiss_index(embeddings)
-    index_file = save_faiss_index(index, 'result/faiss_index.index')
-    vectorized_KB_file = (embeddings, 'result/embeddings.json')
+    save_faiss_index(index, args.index_path)
+    save_embeddings_to_file(embeddings, args.vectorised_KB)

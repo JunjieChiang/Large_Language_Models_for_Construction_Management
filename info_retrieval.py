@@ -106,14 +106,14 @@ def load_resources(data_file, index_file, embeddings_file, names_file):
     return data, index, embeddings, names
 
 
-def main(query, data_file, index_file, embeddings_file, names_file, top_k):
+def main(query, data_file, index_file, embedding_model, embedding_file, names_file, top_k):
     setup_logging()
 
     # 创建模型实例（确保模型实例可以重用，或者仅在需要时创建）
-    model = vectorized_KB.load_embedding_model('retriever/multilingual-e5-large')
+    model = vectorized_KB.load_embedding_model(embedding_model)
 
     # 加载预先计算的资源
-    data, index, embeddings, names = load_resources(data_file, index_file, embeddings_file, names_file)
+    data, index, embeddings, names = load_resources(data_file, index_file, embedding_file, names_file)
 
     logging.info("ALL precomputed resources loaded successfully.")
 
