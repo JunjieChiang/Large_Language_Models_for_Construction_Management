@@ -17,7 +17,7 @@ def load_faiss_index(index_file):
 
     try:
         index = faiss.read_index(index_file)
-        logging.info(f"FAISS index loaded with {index.ntotal} vectors.")
+        # logging.info(f"FAISS index loaded with {index.ntotal} vectors.")
 
         return index
 
@@ -30,7 +30,7 @@ def load_names(json_name_path):
 
     with open(json_name_path, 'r', encoding='utf-8') as file:
         names = json.load(file)
-    logging.info(f"Json object name loaded: {json_name_path}")
+    # logging.info(f"Json object name loaded: {json_name_path}")
 
     return names
 
@@ -46,19 +46,19 @@ def search_index(index, names, query, query_vector, data, top_k):
 
     if index is not None:
         D, I = index.search(query_vector, top_k)
-        logging.info(f"User query: {query}")
-        logging.info(f"Top {top_k} most similar items indices: {I}")
-        logging.info(f"Corresponding distances: {D}")
+        # logging.info(f"User query: {query}")
+        # logging.info(f"Top {top_k} most similar items indices: {I}")
+        # logging.info(f"Corresponding distances: {D}")
 
         matched_names = [names[idx] for idx in I[0]]        # 获取匹配的"name"
-        logging.info(f"Matched names:\n {matched_names}")
+        # logging.info(f"Matched names:\n {matched_names}")
 
         matched_items = []
         for category in data.values():  # 迭代字典的值（每个类别的列表）
             for item in category:  # 迭代每个类别列表中的项目
                 if item['name'] in matched_names:
                     matched_items.append(item)
-        logging.info(f"Matched Json objects:\n {matched_items}")
+        # logging.info(f"Matched Json objects:\n {matched_items}")
 
         return matched_names, matched_items
 
@@ -90,18 +90,18 @@ def load_resources(data_file, index_file, embeddings_file, names_file):
 
     with open(data_file, 'r', encoding='utf-8') as file:
         data = json.load(file)
-    logging.info(f"JSON {data_file} Uploaded")
+    # logging.info(f"JSON {data_file} Uploaded")
 
     with open(embeddings_file, 'r', encoding='utf-8') as file:
         embeddings = json.load(file)  # 加载已保存的embeddings
-    logging.info(f"Embeddings uploaded.")
+    # logging.info(f"Embeddings uploaded.")
 
     index = faiss.read_index(index_file)    # 加载已保存的FAISS索引
-    logging.info(f"FAISS index loaded with {index.ntotal} vectors.")
+    # logging.info(f"FAISS index loaded with {index.ntotal} vectors.")
 
     with open(names_file, 'r', encoding='utf-8') as file:
         names = json.load(file)            # 加载已保存的names
-    logging.info(f"JSON name loaded")
+    # logging.info(f"JSON name loaded")
 
     return data, index, embeddings, names
 
@@ -115,7 +115,7 @@ def main(query, data_file, index_file, embedding_model, embedding_file, names_fi
     # 加载预先计算的资源
     data, index, embeddings, names = load_resources(data_file, index_file, embedding_file, names_file)
 
-    logging.info("ALL precomputed resources loaded successfully.")
+    # logging.info("ALL precomputed resources loaded successfully.")
 
     # 向量化查询
     query_vector = encode_query(model, query)

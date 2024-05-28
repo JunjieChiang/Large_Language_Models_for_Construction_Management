@@ -5,7 +5,6 @@ channels:
   - pytorch
   - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
   - anaconda
-  - pytorch/label/nightly
   - nvidia
   - http://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
   - http://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
@@ -47,7 +46,6 @@ dependencies:
   - exceptiongroup=1.2.0=py310h06a4308_0
   - executing=0.8.3=pyhd3eb1b0_0
   - expat=2.5.0=h6a678d5_0
-  - faiss-gpu=1.8.0=py3.10_h4c7d538_5_cuda12.1.1_nightly
   - filelock=3.13.1=py310h06a4308_0
   - fontconfig=2.14.1=h4c34cd2_2
   - freetype=2.12.1=h4a9f257_0
@@ -95,7 +93,6 @@ dependencies:
   - libcusolver=11.4.4.55=0
   - libcusparse=12.0.2.55=0
   - libedit=3.1.20230828=h5eee18b_0
-  - libfaiss=1.8.0=h046e95b_5_cuda12.1.1_nightly
   - libffi=3.4.4=h6a678d5_0
   - libgcc-ng=11.2.0=h1234567_1
   - libgfortran=3.0.0=1

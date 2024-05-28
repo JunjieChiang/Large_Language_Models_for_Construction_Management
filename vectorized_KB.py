@@ -20,29 +20,14 @@ def load_embedding_model(model_path):
     model = FlagModel(model_path,
                       query_instruction_for_retrieval="为这个JSON数据生成表示以用于检索相关属性：",
                       use_fp16=True) # Setting use_fp16 to True speeds up computation with a slight performance degradation
-    logging.info(f"Model {model_path} Uploaded")
+    # logging.info(f"Model {model_path} Uploaded")
     return model
 
-'''
-def encode_data(model, data):
-    embeddings = []
-    for item_type in tqdm(data, desc="Initializing"):
-        for item in tqdm(data[item_type], desc=f"Encoding {item_type}", leave=True):
-            # item_str = json.dumps(item)
-            name = item.get('name', '')  # 只encoding name和global id
-            global_id = item.get('global_id', '')
-            combined_str = f"{name} {global_id}"
-            embedding = model.encode(combined_str)
-            embeddings.append(embedding)
-    embeddings = np.array(embeddings).astype('float32')
-    logging.info("All data encoded")
-    return embeddings
-'''
 
-'''
-将检索分为两个阶段：向量化JSON对象中的name，再根据query信息检索matched对象中的数据项
-'''
 def encode_names(model, data, json_name_path):
+    '''
+    将检索分为两个阶段：向量化JSON对象中的name，再根据query信息检索matched对象中的数据项
+    '''
 
     embeddings = []
     names = []  # 用于保存每个元素的name，以便后续检索
