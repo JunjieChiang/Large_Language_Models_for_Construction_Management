@@ -1,0 +1,14 @@
+{
+    "model_info":{
+        "provider": "aliyun",
+        "name": "qwen-turbo"
+    },
+    "api_key_info":{
+        "api_keys":"sk-07504cb0f711482caa03cb20f5c1742f"
+    },
+    "params":{
+        "temperature": 0.3,
+        "gpus":[],
+        "max_output_tokens": 1000
+    }
+}
